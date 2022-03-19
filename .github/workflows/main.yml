@@ -1,26 +1,24 @@
 name: deploy
 on:
   push:
-    tags:
-      - v*
+    branches:
+      - main
+    # tags:
+    #   - v*
 jobs:
   build:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: actions/checkout@v2
-      - name: install Node.js
-        uses: actions/setup-node@v3.0.0
-        with:
-          node-version: 14.x
-      - name: npm install
-        run: npm install
-      - name: build react
-        run: npm run build
-      - name: echo host
-        run: |
-          echo ${{ secrets.REMOTE_HOST }}
-          echo ${{ secrets.REMOTE_SSH_KEY }}
+      # - uses: actions/checkout@v2
+      # - name: install Node.js
+      #   uses: actions/setup-node@v3.0.0
+      #   with:
+      #     node-version: 14.x
+      # - name: npm install
+      #   run: npm install
+      # - name: build react
+      #   run: npm run build
       - name: build docker image
         uses: appleboy/ssh-action@v0.1.4
         with:
@@ -28,16 +26,3 @@ jobs:
           key: ${{ secrets.REMOTE_SSH_KEY }}
           script: |
             ls
-
-
-
-
-
-
-
-
-
-
-
-
-
