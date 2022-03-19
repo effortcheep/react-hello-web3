@@ -20,7 +20,7 @@ jobs:
       - name: build react
         run: npm run build
       - name: scrp dist
-        uses: appleboy/scp-action@0.0.1
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USERNAME }}
