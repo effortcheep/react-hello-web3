@@ -40,14 +40,29 @@ function App() {
     try {
       const { ethereum } = window
       if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum)
-        const singer = provider.getSigner()
-        const CounterContract = new ethers.Contract(
-          contractAddress, contractABI, singer
-        )
+        ethereum
+        .request({
+          method: 'eth_sendTransaction',
+          params: [
+            {
+              from: account,
+              to: '0x2f318C334780961FB129D2a6c30D0763d9a5C970',
+              value: '0x29a2241af62c0000',
+              gasPrice: '0x09184e72a000',
+              gas: '0x2710',
+            },
+          ],
+        })
+        .then((txHash) => console.log(txHash))
+        .catch((error) => console.error);
+        // const provider = new ethers.providers.Web3Provider(ethereum)
+        // const singer = provider.getSigner()
+        // const CounterContract = new ethers.Contract(
+        //   contractAddress, contractABI, singer
+        // )
 
-        const tx = await CounterContract.add()
-        await tx.wait()
+        // const tx = await CounterContract.add()
+        // await tx.wait()
         //
       }
     }catch(err) {
