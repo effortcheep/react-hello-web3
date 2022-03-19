@@ -19,11 +19,19 @@ jobs:
         run: npm install
       - name: build react
         run: npm run build
-      - name: build docker image
+      - name: scrp dist
+        uses: appleboy/scp-action@0.0.1
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USERNAME }}
+          key: ${{ secrets.REMOTE_SSH_KEY }}
+          source: 'dist/'
+          target: ${{ secrets.REMOTE_TARGET }}
+      - name: check docker status
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USERNAME }}
           key: ${{ secrets.REMOTE_SSH_KEY }}
           script: |
-            ls
+            docker ps
