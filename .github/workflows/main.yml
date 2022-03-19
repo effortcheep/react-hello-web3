@@ -17,7 +17,7 @@ jobs:
       - name: build react
         run: npm run build
       - name: build docker image
-      - uses: appleboy/ssh-action@v0.1.4
+        uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.REMOTE_HOST }}
           key: ${{ secrets.REMOTE_SSH_KEY }}
