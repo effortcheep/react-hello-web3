@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { ethers } from 'ethers'
+// import { ethers } from 'ethers'
 
-const contractAddress = ''
-const contractABI = ''
+// const contractAddress = ''
+// const contractABI = ''
 
 
 function App() {
