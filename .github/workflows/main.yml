@@ -10,15 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      # - uses: actions/checkout@v2
-      # - name: install Node.js
-      #   uses: actions/setup-node@v3.0.0
-      #   with:
-      #     node-version: 14.x
-      # - name: npm install
-      #   run: npm install
-      # - name: build react
-      #   run: npm run build
+      - uses: actions/checkout@v2
+      - name: install Node.js
+        uses: actions/setup-node@v3.0.0
+        with:
+          node-version: 14.x
+      - name: npm install
+        run: npm install
+      - name: build react
+        run: npm run build
       - name: build docker image
         uses: appleboy/ssh-action@v0.1.4
         with:
