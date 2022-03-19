@@ -1,0 +1,37 @@
+name: deploy
+on:
+  push:
+    tags:
+      - v*
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: build react    
+        uses: actions/setup-node@v3.0.0
+        with:
+          node-version: 14.x
+      - run: npm install
+      - run: npm run build
+      
+      - name: build docker image
+      - uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          key: ${{ secrets.REMOTE_SSH_KEY }}
+          script: |
+            ls
+            
+
+
+
+
+
+
+
+
+
+
+
+
