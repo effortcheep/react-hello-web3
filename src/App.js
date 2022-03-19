@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+// import Web3 from 'web3'
 // import { ethers } from 'ethers'
 
 // const contractAddress = ''
@@ -17,9 +18,14 @@ function App() {
         console.log('place install metamask')
         return
       }
+
       const accounts = await ethereum.request({
         method: "eth_accounts"
       })
+
+      // const web3 = new Web3(ethereum)
+      // await ethereum.enable()
+      // console.log(web3)
       if (accounts.length !== 0) {
         const account = accounts[0]
         console.log(`found accoutn with address`, account)
@@ -61,7 +67,7 @@ function App() {
               value: '0x11c37937e08000',
               // gasPrice: '0x4c4b400',
               gasPrice: '0x12a05f200',
-              gas: '0x2710',
+              gas: '0x5208',
             },
           ],
         })
