@@ -27,6 +27,7 @@ jobs:
           key: ${{ secrets.REMOTE_SSH_KEY }}
           source: 'build/.'
           target: ${{ secrets.REMOTE_TARGET }}
+          strip_components: 2
       - name: check docker status
         uses: appleboy/ssh-action@v0.1.4
         with:
