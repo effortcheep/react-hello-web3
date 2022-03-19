@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-// import Web3 from 'web3'
-// import { ethers } from 'ethers'
+import { ethers } from 'ethers'
 
-// const contractAddress = ''
-// const contractABI = ''
+import abi from './USDTABI.json'
 
+const contractAddress = '0x55d398326f99059ff775485246999027b3197955'
+const contractABI = abi
 
 function App() {
   const [account, setAccount] = useState(null)
@@ -57,34 +57,35 @@ function App() {
       //   chainId: '0x3', // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.
       // };
       if (ethereum) {
-        ethereum
-        .request({
-          method: 'eth_sendTransaction',
-          params: [
-            {
-              from: account,
-              to: '0x2c7cdb3712ba96327250c61f46c9332857e0fe59',
-              value: '0x11c37937e08000',
-              // gasPrice: '0x4c4b400',
-              gasPrice: '0x12a05f200',
-              gas: '0x5208',
-            },
-          ],
-        })
-        .then((txHash) => console.log(txHash))
-        .catch((error) => console.error);
-        // const provider = new ethers.providers.Web3Provider(ethereum)
-        // const singer = provider.getSigner()
-        // const CounterContract = new ethers.Contract(
-        //   contractAddress, contractABI, singer
-        // )
+        // ethereum
+        // .request({
+        //   method: 'eth_sendTransaction',
+        //   params: [
+        //     {
+        //       from: account,
+        //       to: '0x2c7cdb3712ba96327250c61f46c9332857e0fe59',
+        //       value: '0x11c37937e08000',
+        //       // gasPrice: '0x4c4b400',
+        //       gasPrice: '0x12a05f200',
+        //       gas: '0x5208',
+        //     },
+        //   ],
+        // })
+        // .then((txHash) => console.log(txHash))
+        // .catch((error) => console.error);
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const singer = provider.getSigner()
+        const CounterContract = new ethers.Contract(
+          contractAddress, contractABI, singer
+        )
 
-        // const tx = await CounterContract.add()
-        // await tx.wait()
-        //
+        const tx = await CounterContract.transfer('0x2c7cdb3712ba96327250c61f46c9332857e0fe59', '0x1c6bf52634000') // 11c37937e08000
+        await tx.wait()
+        alert('交易完成')
       }
     }catch(err) {
       console.error(err)
+      alert('交易有问题')
     }
   }
 
